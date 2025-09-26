@@ -1,0 +1,14 @@
+{
+  "name": "tab-mind-extension",
+  "version": "1.0.0",
+  "description": "Tab Mind – AI Tab Organizer Chrome Extension",
+  "scripts": {
+    "build": "echo 'No build process needed - extension ready to install'",
+    "package": "echo 'Package the extension files manually'",
+    "test": "echo 'Extension ready for testing in Chrome'",
+    "serve": "node serve-test-page.js",
+    "start": "node serve-test-page.js"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

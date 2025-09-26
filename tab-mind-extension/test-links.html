@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab Mind Extension - Testing Links</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+            font-weight: 300;
+        }
+        
+        .category {
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+        }
+        
+        .category h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #fff;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .link-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .link-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .link-card a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+        }
+        
+        .link-card .description {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 4px solid #ffd700;
+        }
+        
+        .instructions h3 {
+            margin-top: 0;
+            color: #ffd700;
+        }
+        
+        .instructions ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .test-button {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 5px;
+            transition: transform 0.2s ease;
+        }
+        
+        .test-button:hover {
+            transform: translateY(-1px);
+        }
+        
+        .open-all {
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Tab Mind Extension - Testing Links</h1>
+        
+        <div class="instructions">
+            <h3>📋 How to Test Custom Thumbnails:</h3>
+            <ol>
+                <li>Install the Tab Mind extension in Chrome</li>
+                <li>Click links below to open various types of websites</li>
+                <li>Open the Tab Mind popup to see custom thumbnails generated</li>
+                <li>Notice how different categories get different colored thumbnails</li>
+                <li>Test with sites that have no favicon or generic icons</li>
+            </ol>
+        </div>
+
+        <div class="open-all">
+            <button class="test-button" onclick="openRandomSelection()">🎲 Open Random Selection</button>
+            <button class="test-button" onclick="openAllWork()">💼 Open All Work Sites</button>
+            <button class="test-button" onclick="openAllSocial()">📱 Open All Social Sites</button>
+            <button class="test-button" onclick="openAllEntertainment()">🎬 Open All Entertainment</button>
+        </div>
+
+        <!-- Work Category -->
+        <div class="category">
+            <h2>💼 Work & Productivity</h2>
+            <div class="links-grid">
+                <div class="link-card">
+                    <a href="https://gmail.com" target="_blank">Gmail</a>
+                    <div class="description">Email service - should show red "M" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://outlook.com" target="_blank">Outlook</a>
+                    <div class="description">Microsoft email - blue "O" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://slack.com" target="_blank">Slack</a>
+                    <div class="description">Team communication - purple "S" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://teams.microsoft.com" target="_blank">Microsoft Teams</a>
+                    <div class="description">Video conferencing - blue "T" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://zoom.us" target="_blank">Zoom</a>
+                    <div class="description">Video calls - blue "Z" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://meet.google.com" target="_blank">Google Meet</a>
+                    <div class="description">Google video calls - green "M" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://github.com" target="_blank">GitHub</a>
+                    <div class="description">Code repository - dark "G" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://docs.google.com" target="_blank">Google Docs</a>
+                    <div class="description">Document editing - blue "D" thumbnail</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Category -->
+        <div class="category">
+            <h2>📱 Social Media</h2>
+            <div class="links-grid">
+                <div class="link-card">
+                    <a href="https://facebook.com" target="_blank">Facebook</a>
+                    <div class="description">Social network - blue "F" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://twitter.com" target="_blank">Twitter</a>
+                    <div class="description">Microblogging - blue "T" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://x.com" target="_blank">X (Twitter)</a>
+                    <div class="description">New Twitter - black "X" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://instagram.com" target="_blank">Instagram</a>
+                    <div class="description">Photo sharing - pink "I" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+                    <div class="description">Professional network - blue "in" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://reddit.com" target="_blank">Reddit</a>
+                    <div class="description">Discussion forums - orange "R" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://discord.com" target="_blank">Discord</a>
+                    <div class="description">Gaming chat - purple "D" thumbnail</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Entertainment Category -->
+        <div class="category">
+            <h2>🎬 Entertainment</h2>
+            <div class="links-grid">
+                <div class="link-card">
+                    <a href="https://youtube.com" target="_blank">YouTube</a>
+                    <div class="description">Video platform - red "▶" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://music.youtube.com" target="_blank">YouTube Music</a>
+                    <div class="description">Music streaming - orange "♫" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://netflix.com" target="_blank">Netflix</a>
+                    <div class="description">Video streaming - red "N" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://spotify.com" target="_blank">Spotify</a>
+                    <div class="description">Music streaming - green "♪" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://twitch.tv" target="_blank">Twitch</a>
+                    <div class="description">Live streaming - purple "T" thumbnail</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Research Category -->
+        <div class="category">
+            <h2>📚 Research & Learning</h2>
+            <div class="links-grid">
+                <div class="link-card">
+                    <a href="https://wikipedia.org" target="_blank">Wikipedia</a>
+                    <div class="description">Encyclopedia - black "W" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://stackoverflow.com" target="_blank">Stack Overflow</a>
+                    <div class="description">Programming Q&A - orange "SO" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://developer.mozilla.org" target="_blank">MDN Web Docs</a>
+                    <div class="description">Web development docs - black "MDN" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://scholar.google.com" target="_blank">Google Scholar</a>
+                    <div class="description">Academic search - custom thumbnail</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shopping Category -->
+        <div class="category">
+            <h2>🛒 Shopping</h2>
+            <div class="links-grid">
+                <div class="link-card">
+                    <a href="https://amazon.com" target="_blank">Amazon</a>
+                    <div class="description">E-commerce - orange "A" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://ebay.com" target="_blank">eBay</a>
+                    <div class="description">Online marketplace - red "E" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://walmart.com" target="_blank">Walmart</a>
+                    <div class="description">Retail store - blue "W" thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="https://target.com" target="_blank">Target</a>
+                    <div class="description">Department store - red "◉" thumbnail</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Sites (No Favicons) -->
+        <div class="category">
+            <h2>🧪 Test Sites (Custom Thumbnails)</h2>
+            <div class="links-grid">
+                <div class="link-card">
+                    <a href="http://localhost:3000" target="_blank">Localhost:3000</a>
+                    <div class="description">Local development - custom generated thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="http://127.0.0.1:8080" target="_blank">127.0.0.1:8080</a>
+                    <div class="description">Local IP - custom generated thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="http://httpbin.org" target="_blank">HTTPBin</a>
+                    <div class="description">API testing - custom generated thumbnail</div>
+                </div>
+                <div class="link-card">
+                    <a href="http://example.com" target="_blank">Example.com</a>
+                    <div class="description">Basic HTML - custom generated thumbnail</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openRandomSelection() {
+            const allLinks = document.querySelectorAll('.link-card a');
+            const randomLinks = [];
+            
+            // Select 8-12 random links
+            const count = Math.floor(Math.random() * 5) + 8;
+            const selectedIndices = new Set();
+            
+            while (selectedIndices.size < count && selectedIndices.size < allLinks.length) {
+                selectedIndices.add(Math.floor(Math.random() * allLinks.length));
+            }
+            
+            selectedIndices.forEach(index => {
+                setTimeout(() => {
+                    window.open(allLinks[index].href, '_blank');
+                }, Math.random() * 2000); // Stagger opening
+            });
+            
+            alert(`Opening ${selectedIndices.size} random tabs for testing!`);
+        }
+        
+        function openAllWork() {
+            const workLinks = [
+                'https://gmail.com',
+                'https://slack.com',
+                'https://github.com',
+                'https://docs.google.com',
+                'https://meet.google.com'
+            ];
+            
+            workLinks.forEach((url, index) => {
+                setTimeout(() => {
+                    window.open(url, '_blank');
+                }, index * 500);
+            });
+            
+            alert('Opening work-related tabs for testing!');
+        }
+        
+        function openAllSocial() {
+            const socialLinks = [
+                'https://twitter.com',
+                'https://facebook.com',
+                'https://linkedin.com',
+                'https://reddit.com'
+            ];
+            
+            socialLinks.forEach((url, index) => {
+                setTimeout(() => {
+                    window.open(url, '_blank');
+                }, index * 500);
+            });
+            
+            alert('Opening social media tabs for testing!');
+        }
+        
+        function openAllEntertainment() {
+            const entertainmentLinks = [
+                'https://youtube.com',
+                'https://netflix.com',
+                'https://spotify.com',
+                'https://twitch.tv'
+            ];
+            
+            entertainmentLinks.forEach((url, index) => {
+                setTimeout(() => {
+                    window.open(url, '_blank');
+                }, index * 500);
+            });
+            
+            alert('Opening entertainment tabs for testing!');
+        }
+    </script>
+</body>
+</html>

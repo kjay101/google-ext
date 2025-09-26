@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab Suspended</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        h1 {
+            margin: 0 0 10px;
+            font-size: 28px;
+            font-weight: 300;
+        }
+        
+        .subtitle {
+            margin: 0 0 30px;
+            opacity: 0.8;
+            font-size: 16px;
+        }
+        
+        .tab-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .tab-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            word-break: break-word;
+        }
+        
+        .tab-url {
+            opacity: 0.7;
+            font-size: 14px;
+            word-break: break-all;
+        }
+        
+        .restore-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            margin: 20px 0;
+        }
+        
+        .restore-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .memory-saved {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">
+            <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+        </div>
+        
+        <h1>Tab Suspended</h1>
+        <p class="subtitle">This tab has been suspended to save memory</p>
+        
+        <div class="tab-info" id="tab-info">
+            <div class="tab-title" id="tab-title">Loading...</div>
+            <div class="tab-url" id="tab-url"></div>
+        </div>
+        
+        <button class="restore-btn" onclick="restoreTab()">
+            Restore Tab
+        </button>
+        
+        <div class="memory-saved">
+            Memory saved: ~50-100MB per tab
+        </div>
+    </div>
+
+    <script>
+        let tabId;
+        let originalUrl;
+
+        function getTabIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        async function loadTabInfo() {
+            tabId = getTabIdFromUrl();
+            if (!tabId) return;
+
+            try {
+                const result = await chrome.storage.local.get([`suspended_${tabId}`]);
+                const tabData = result[`suspended_${tabId}`];
+                
+                if (tabData) {
+                    document.getElementById('tab-title').textContent = tabData.title || 'Untitled Tab';
+                    document.getElementById('tab-url').textContent = tabData.url || '';
+                    originalUrl = tabData.url;
+                    
+                    // Set favicon if available
+                    if (tabData.favIconUrl) {
+                        const link = document.createElement('link');
+                        link.type = 'image/x-icon';
+                        link.rel = 'shortcut icon';
+                        link.href = tabData.favIconUrl;
+                        document.head.appendChild(link);
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load tab info:', error);
+            }
+        }
+
+        async function restoreTab() {
+            if (originalUrl) {
+                window.location.href = originalUrl;
+            }
+        }
+
+        // Handle click anywhere to restore
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'BUTTON') {
+                restoreTab();
+            }
+        });
+
+        // Load tab info when page loads
+        document.addEventListener('DOMContentLoaded', loadTabInfo);
+    </script>
+</body>
+</html>
